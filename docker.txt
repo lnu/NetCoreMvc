@@ -1,0 +1,24 @@
+for windows container with vagrant:
+- https://github.com/StefanScherer/windows-docker-machine
+- $env:COMPOSE_FORCE_WINDOWS_HOST 0 on the main host(not the image) (not necessary)
+- $env:COMPOSE_CONVERT_WINDOWS_PATHS=0 otherwise docker-compose fails with invalid bind mount (on client machine
+- check the share is mounted in the windows vm (not the container)
+- commands to unblock docker not starting or docker-compose failing:
+	get-containernetwork|remove-containernetwork
+	get-netnat|remove-netnat
+	get-vmswitch|remove-vmswitch
+
+run with docker-compose(be careful with the casing of default):
+docker-compose run --rm --name test -p 8080:80 -p 8081:443 -e ASPNETCORE_KESTREL__CERTIFICATES__Default__PATH="C:\Users\containeruser\.aspnet\Https\dotnetcore.pfx" -e ASPNETCORE_KESTREL__CERTIFICATES__Default__PASSWORD="password" netcoremvc
+
+for unix container with virtualbox(no vagrant)
+docker-compose run --rm --name test -p 8080:80 -p 8081:443 -e ASPNETCORE_KESTREL__CERTIFICATES__Default__PATH="/root/.aspnet/https/dotnetcore.pfx" -e ASPNETCORE_KESTREL__CERTIFICATES__Default__PASSWORD="password" netcoremvc
+
+https://docs.docker.com/engine/examples/dotnetcore/#create-a-dockerfile-for-an-aspnet-core-application
+https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/aspnetcore-docker-https.md
+
+
+to clean the build images
+
+docker images -f “dangling=true” -q
+docker images prune
