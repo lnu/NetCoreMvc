@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  netcoremvc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:44319;http://+:52675
+      - ASPNETCORE_HTTPS_PORT=44319
+      #- ASPNETCORE_URLS=http://+:80
+    #ports:
+    #  - "52675:80"
+    #  - "44319:443"
+    volumes:
+      #- ${USERPROFILE}/.aspnet/Https:/root/.aspnet/https:ro
+      #- ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - c:/users/lnullens/.aspnet/Https:C:\Users\ContainerUser\.aspnet\Https:ro
+      - c:/users/lnullens/appdata/roaming/Microsoft/UserSecrets:C:\Users\ContainerAdministrator\AppData\Roaming\Microsoft\UserSecrets:ro

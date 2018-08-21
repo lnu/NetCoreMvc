@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  netcoremvc:
+    image: ${DOCKER_REGISTRY}netcoremvc
+    build:
+      context: .
+      dockerfile: Dockerfile
