@@ -20,5 +20,5 @@ https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/aspnetcore
 
 to clean the build images
 
-docker images -f “dangling=true” -q
+docker images -f "dangling=true" -q
 docker images prune
